@@ -22,4 +22,24 @@ describe("POST /", function () {
       .send();
     expect(resp.statusCode).toEqual(400);
   });
+
+  test("throws error if bad body", async function () {
+    const resp = await request(app)
+      .post("/shipments")
+      .send({
+        productId: 1000,
+        name: 123,
+        addr: "100 Test St",
+      });
+    expect(resp.statusCode).toEqual(400);
+    expect(resp.body).toEqual({
+      "error": {
+        "message": [
+          "instance.name is not of a type(s) string",
+          "instance requires property \"zip\""
+        ],
+        "status": 400
+      }
+    });
+  });
 });
