@@ -5,11 +5,12 @@ const {
 } = require("./shipItApi");
 
 const fetchMock = require ("fetch-mock");
+//TODO: BASE URL variable, or come from other file
 
 test("shipProduct", async function () {
   fetchMock.post("http://localhost:3001/ship", {
     body: {
-      "receipt": {
+      receipt: {
         itemId: 1,
         name: "dog",
         addr: "123 Street",
